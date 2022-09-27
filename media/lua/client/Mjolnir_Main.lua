@@ -9,7 +9,8 @@ MAGUS.Mjolnir.Setup = function()
 	MAGUS.Mjolnir.amplitudeMax = 1;
 	MAGUS.Mjolnir.tickMax = 16;
 	MAGUS.Mjolnir.frame = 1;
-	MAGUS.Mjolnir.offset = -4;
+	MAGUS.Mjolnir.offsetX = -3;
+	MAGUS.Mjolnir.offsetY = -4;
 	MAGUS.Mjolnir.running = false;
 end
 
@@ -33,13 +34,12 @@ MAGUS.Mjolnir.DoDropLightning = function()
 		else
 			print("Error: VFX item does not exist in the script.");
 		end;
-		MAGUS.Mjolnir.spawnSquare = getWorld():getCell():getGridSquare(MAGUS.Mjolnir.lightningTargetX + MAGUS.Mjolnir.offset, MAGUS.Mjolnir.lightningTargetY + MAGUS.Mjolnir.offset, MAGUS.Mjolnir.lightningTargetZ);
-		MAGUS.Mjolnir.droppedLightning = MAGUS.Mjolnir.spawnSquare:AddWorldInventoryItem("MAGUS.LightningVFX", .5, .5, 0);
+		MAGUS.Mjolnir.spawnSquare = getWorld():getCell():getGridSquare(MAGUS.Mjolnir.lightningTargetX, MAGUS.Mjolnir.lightningTargetY, MAGUS.Mjolnir.lightningTargetZ);
+		MAGUS.Mjolnir.droppedLightning = MAGUS.Mjolnir.spawnSquare:AddWorldInventoryItem("MAGUS.LightningVFX", MAGUS.Mjolnir.offsetX, MAGUS.Mjolnir.offsetY, 0);
 
 	elseif MAGUS.Mjolnir.frame <= 21 then
 		if MAGUS.Mjolnir.frame == 7 then
-			local cell = getWorld():getCell();
-			cell:getGridSquare(MAGUS.Mjolnir.lightningTargetX, MAGUS.Mjolnir.lightningTargetY, MAGUS.Mjolnir.lightningTargetZ):explode();
+			MAGUS.Mjolnir.spawnSquare:explode();
 			for y = -3, 3, 1 do
 				for x = -3, 3, 1 do
 					local square = cell:getGridSquare(MAGUS.Mjolnir.lightningTargetX + x, MAGUS.Mjolnir.lightningTargetY + y, MAGUS.Mjolnir.lightningTargetZ);
@@ -57,7 +57,7 @@ MAGUS.Mjolnir.DoDropLightning = function()
 		MAGUS.Mjolnir.spawnSquare:removeWorldObject(MAGUS.Mjolnir.droppedLightning:getWorldItem());
 		local vfxItemIconName = "LightningVFX"..tostring(MAGUS.Mjolnir.frame);
 		MAGUS.Mjolnir.vfxItem:DoParam("Icon = "..vfxItemIconName);
-		MAGUS.Mjolnir.droppedLightning = MAGUS.Mjolnir.spawnSquare:AddWorldInventoryItem("MAGUS.LightningVFX", .5, .5, 0);
+		MAGUS.Mjolnir.droppedLightning = MAGUS.Mjolnir.spawnSquare:AddWorldInventoryItem("MAGUS.LightningVFX", MAGUS.Mjolnir.offsetX, MAGUS.Mjolnir.offsetY, 0);
 
 	else
 		MAGUS.Mjolnir.DespawnLightning();

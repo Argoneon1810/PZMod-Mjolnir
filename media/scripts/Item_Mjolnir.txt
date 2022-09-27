@@ -1,0 +1,53 @@
+module MAGUS
+{
+    imports
+    {
+        Base,
+    }
+    item Mjolnir
+    {
+        Type                =   Weapon,
+		Categories			=	SmallBlunt,
+		SubCategory			=	Swinging,
+        DisplayCategory     =   Magical,
+        DisplayName         =   Mjolnir,
+        Icon                =   Mjolnir1,
+		WeaponSprite	    =	ClubHammer,
+		MinAngle			=	0.67,
+		MinRange			=	0.61,
+		MaxRange			=	1,
+        MinDamage			=	0.5,
+        MaxDamage			=	1,
+        BaseSpeed 			= 	1,
+		ConditionMax		=	10,
+		ConditionLowerChanceOneIn	=	50,
+		MinimumSwingTime	=	3,
+		SwingTime			=	3,
+		SwingAmountBeforeImpact	=	0.02,
+		KnockBackOnNoDeath	=	TRUE,
+		SplatBloodOnNoDeath	=	TRUE,
+		PushBackMod			=	2,
+		KnockdownMod		=	0,
+		CanBarricade		=	TRUE,
+		DoorDamage			=	20,
+        TreeDamage  		=   0,
+        CriticalChance		=	20,
+        CritDmgMultiplier 	= 	3,
+        Weight  	        =   25,
+        MetalValue 			= 	25,
+		WeaponLength 		= 	0.23,
+        IdleAnim			=	Idle_Weapon2,
+		SwingAnim			=	Bat,
+        BreakSound  		=   BreakMetalItem,
+        Tags 				= 	Hammer;RemoveBarricade,
+    }
+	item LightningVFX
+	{
+        Type                =   Normal,
+		Categories			=	VFX,
+	    DisplayCategory 	= 	VFX,
+		DisplayName			=   LightningVFX,
+        Weight				=	70,
+        Icon                =   LightningVFX7,
+	}
+}

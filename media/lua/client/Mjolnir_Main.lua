@@ -11,6 +11,7 @@ MAGUS.Mjolnir.Setup = function()
 	MAGUS.Mjolnir.frame = 1;
 	MAGUS.Mjolnir.offsetX = -3;
 	MAGUS.Mjolnir.offsetY = -4;
+	MAGUS.Mjolnir.multiplier = 2 / 5;
 	MAGUS.Mjolnir.running = false;
 end
 
@@ -46,9 +47,14 @@ MAGUS.Mjolnir.DoDropLightning = function()
 					local movingObjects = square:getMovingObjects();
 					for i=movingObjects:size()-1, 0, -1 do
 						local movingObject = movingObjects:get(i);
+						if movingObject:instanceof("IsoZombie") then
+							movingObject:setHealth(0);
+						end;
+						--[[
 						if instanceof(movingObject, "IsoZombie") then
 							movingObject:setHealth(0);
 						end;
+						--]]
 					end;
 				end;
 			end;
@@ -75,7 +81,7 @@ MAGUS.Mjolnir.DoShakeScreen = function()
 		return;
 	end;
 
-	MAGUS.Mjolnir.oscVal = math.sin(MAGUS.Mjolnir.tick * math.pi) * (-(MAGUS.Mjolnir.amplitude - 1) ^ 3) * 2 / 5;
+	MAGUS.Mjolnir.oscVal = math.sin(MAGUS.Mjolnir.tick * math.pi) * (-(MAGUS.Mjolnir.amplitude - 1) ^ 3) * MAGUS.Mjolnir.multiplier;
 	MAGUS.Mjolnir.tick = MAGUS.Mjolnir.tick + MAGUS.Mjolnir.tickIncrement;
 	MAGUS.Mjolnir.amplitude = MAGUS.Mjolnir.amplitude + MAGUS.Mjolnir.amplitudeIncrement;
 	
@@ -105,7 +111,7 @@ MAGUS.Mjolnir.RequestShakeScreen = function()
 	MAGUS.Mjolnir.amplitude = 0;
 end
 
-MAGUS.Mjolnir.OnPlayerAttackFinished = function(player, weapon)
+MAGUS.Mjolnir.OnWeaponSwing = function(player, weapon)
 	if not player:isLocalPlayer() then return end;
 	if not weapon:getFullType() == "MAGUS.Mjolnir" then return end;
 	
@@ -126,4 +132,4 @@ end
 Events.OnLoad.Add(MAGUS.Mjolnir.Setup);
 Events.OnPlayerUpdate.Add(MAGUS.Mjolnir.DoShakeScreen);
 Events.OnPlayerUpdate.Add(MAGUS.Mjolnir.DoDropLightning);
-Events.OnPlayerAttackFinished.Add(MAGUS.Mjolnir.OnPlayerAttackFinished);
+Events.OnWeaponSwing.Add(MAGUS.Mjolnir.OnWeaponSwing);

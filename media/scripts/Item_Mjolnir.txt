@@ -22,7 +22,7 @@ module MAGUS
 		ConditionMax		=	10,
 		ConditionLowerChanceOneIn	=	50,
 		MinimumSwingTime	=	3,
-		SwingTime			=	3,
+		SwingTime			=	7,
 		SwingAmountBeforeImpact	=	0.02,
 		KnockBackOnNoDeath	=	TRUE,
 		SplatBloodOnNoDeath	=	TRUE,

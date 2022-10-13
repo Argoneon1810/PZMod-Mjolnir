@@ -43,18 +43,13 @@ MAGUS.Mjolnir.DoDropLightning = function()
 			MAGUS.Mjolnir.spawnSquare:explode();
 			for y = -3, 3, 1 do
 				for x = -3, 3, 1 do
-					local square = cell:getGridSquare(MAGUS.Mjolnir.lightningTargetX + x, MAGUS.Mjolnir.lightningTargetY + y, MAGUS.Mjolnir.lightningTargetZ);
+					local square = getWorld():getCell():getGridSquare(MAGUS.Mjolnir.lightningTargetX + x, MAGUS.Mjolnir.lightningTargetY + y, MAGUS.Mjolnir.lightningTargetZ);
 					local movingObjects = square:getMovingObjects();
 					for i=movingObjects:size()-1, 0, -1 do
 						local movingObject = movingObjects:get(i);
-						if movingObject:instanceof("IsoZombie") then
-							movingObject:setHealth(0);
-						end;
-						--[[
 						if instanceof(movingObject, "IsoZombie") then
 							movingObject:setHealth(0);
 						end;
-						--]]
 					end;
 				end;
 			end;
@@ -112,8 +107,8 @@ MAGUS.Mjolnir.RequestShakeScreen = function()
 end
 
 MAGUS.Mjolnir.OnWeaponSwing = function(player, weapon)
-	if not player:isLocalPlayer() then return end;
-	if not weapon:getFullType() == "MAGUS.Mjolnir" then return end;
+	if (not (player:isLocalPlayer())) then return end;
+	if (not (weapon:getFullType() == "MAGUS.Mjolnir")) then return end;
 	
 	MAGUS.Mjolnir.player = player;
 	
